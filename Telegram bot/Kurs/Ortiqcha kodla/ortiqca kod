@@ -1,0 +1,79 @@
+; #korzinka_uzbek
+; @dp.message(F.text == "Korzinka")
+; async def orders_function(message: types.Message):
+;     if orders:
+;         await message.answer(f"Sizni buyurtmalaringiz: {', '.join(orders)}", reply_markup=card_uz)
+;     else:
+;         await message.answer("Sizda hali buyurtma yo'q.")
+
+
+
+; @dp.message(filters.Command("menyu"))
+; async def lang_function(message: types.Message):
+;     await message.answer(text="Menyudasiz", reply_markup=main_menu_uzbek)
+
+
+; @dp.message(filters.Command("uz_card"))
+; async def lang_function(message: types.Message):
+;     await message.answer(text="Siz karta bolimidasiz", reply_markup=card_uz)
+
+; @dp.message(F.text == "UzCard")
+; async def pey_function(message: types.Message, state: FSMContext):
+;     await state.set_state(Card.card_number)
+;     await message.answer("Karta raqamini kiriting 💳")
+
+; @dp.message(F.text == "Humo")
+; async def pey_function(message: types.Message, state: FSMContext):
+;     await state.set_state(Card.card_number)
+;     await message.answer("Karta raqamini kiriting 💳")
+
+
+
+
+
+; #korzinka_rus
+; @dp.message(Card.card_number)
+; async def card_number_function(message: types.Message, state: FSMContext):
+;     text = message.text
+;     if text.isdigit() and len(text) == 16:
+;         await state.update_data(card_number=message.text)
+;         await message.answer("Haridingiz uchun rahmat!", reply_markup=main_button_lang)
+;     else:
+;         await message.answer("Boshidan urinib ko'ring !\nKartangizni raqami 16 sondan iborat bolishi kerak")
+;     await state.clear()    
+    
+    
+; @dp.message(F.text == "Корзина")
+; async def orders_function(message: types.Message):
+;     if order:
+;         await message.answer(f"Ваши заказы: {', '.join(order)}", reply_markup=card_ru)
+;     else:
+;         await message.answer("У вас пока нет заказов.")
+
+; @dp.message(filters.Command("menyu_rus"))
+; async def lang_function(message: types.Message):
+;     await message.answer(text="Вы находитесь в меню", reply_markup=main_menu_rus)
+
+; @dp.message(filters.Command("ru_card"))
+; async def lang_function(message: types.Message):
+;     await message.answer(text="Вы находитесь в разделе карты", reply_markup=card_ru)
+
+
+; @dp.message(F.text == "УзКард")
+; async def pey_function(message: types.Message, state: FSMContext):
+;     await state.set_state(Card.card_number)
+;     await message.answer("Введите номер карты 💳")
+
+; @dp.message(F.text == "Хумо")
+; async def pey_function(message: types.Message, state: FSMContext):
+;     await state.set_state(Card.card_number)
+;     await message.answer("Введите номер карты 💳")
+
+; @dp.message(Card.card_number)
+; async def card_number_function(message: types.Message, state: FSMContext):
+;     text = message.text
+;     if text.isdigit() and len(text) == 16:
+;         await state.update_data(card_number=message.text)
+;         await message.answer("Спасибо за покупку", reply_markup=main_button_lang)
+;     else:
+;         await message.answer("Попробуйте еще раз!\n Номер вашей карты должен состоять из 16 цифр.") 

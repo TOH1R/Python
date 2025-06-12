@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Clever - Education &amp; Courses Template | Home</title>
+    <link rel="icon" href="{% static 'img/core-img/programming.png' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+
+
+    <header class="header-area">
+
+
+        <div class="clever-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <nav class="classy-navbar justify-content-between" id="cleverNav">
+
+                    <a class="nav-brand"">
+                        <p style=" color: black; font-size: 25px;">_577_</p>
+                    </a>
+
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <div class="classy-menu">
+
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="{%  url  'index' %}">Home</a></li>
+                                <li><a href="{%  url  'courses' %}">Courses</a></li>
+                                <li><a href="{%  url  'instructors' %}">Instructors</a></li>
+                                <li><a href="{% url 'blog' %}">Blog</a></li>
+                                <li><a href="{%  url  'contact' %}">Contact</a></li>
+                            </ul>
+
+                      
+
+                            {% if user.is_authenticated %}
+                            <div class="register-login-area">
+                                <a href="{%  url  'logout' %}" class="btn">Logout</a>
+                                <img style="width: 50px; height: 50px; border-radius: 50px;"
+                                    src="{% static 'img/bg-img/person_1.jpg' %}" alt="">
+
+                            </div>
+                            {% else %}
+                            <div class="register-login-area">
+                                <a href="{%  url  'register' %}" class="btn">Register</a>
+                                <a href="{%  url  'login' %}" class="btn active">Login</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-area bg-img bg-overlay-2by5" style="background-image: url({% static 'img/bg-img/bg1.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="hero-content text-center">
+                        <h2>Let's Study Together</h2>
+                        <a href="{%  url  'index' %}" class="btn clever-btn">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="popular-courses-area section-padding-100-0"
+        style="background-image: url({% static 'img/core-img/texture.png' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>Popular Online Courses</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for course in courses %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
+                        <img src="{{course.image.url}}" alt="">
+                        <div class="course-content">
+                            <a href="{% url 'detail' course.id %}">
+                                <h4>{{course.title}}</h4>
+                            </a>
+                            <div class="meta d-flex align-items-center">
+                                <a href="{%  url  'index' %}">{{course.author}}</a>
+                                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                <a href="{%  url  'index' %}">{{course.category.title}}</a>
+                            </div>
+                            <p>{{course.description}}</p>
+                        </div>
+                        <div class="seat-rating-fee d-flex justify-content-between">
+                            <div class="seat-rating h-100 d-flex align-items-center">
+                                <div class="seat">
+                                    <i class="fa fa-user" aria-hidden="true"></i> {{course.views}}
+                                </div>
+
+                            </div>
+                            <div class="course-fee h-100">
+                                <a href="{% url 'index' %}" class="free">{{course.price}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <section class="register-now section-padding-100-0 d-flex justify-content-between align-items-center"
+        style="background-image: url(img/core-img/texture.png);">
+        <div class="register-contact-form mb-100 wow fadeInUp" data-wow-delay="250ms">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="forms">
+                            <h4>Courses For Free</h4>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{form}}
+                                <button type="submit"
+                                    style="background-color: black; color: white; width: 200px; height: 30px; border-radius: 50px; margin-left: 130px; margin-top: 20px;">Send
+                                    a message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="register-now-countdown mb-100 wow fadeInUp" data-wow-delay="500ms">
+            <h3>Register Now</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt
+                mauris ultrices vitae. Donec bibendum tortor sed mi faucibus vehicula. Sed erat lorem</p>
+            <div class="register-countdown">
+                <div class="events-cd d-flex flex-wrap" data-countdown="2019/03/01"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="upcoming-events section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>Upcoming events</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for event in events %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-upcoming-events mb-50 wow fadeInUp" data-wow-delay="250ms">
+                        <div class="events-thumb">
+                            <img src="{{event.image.url}}" alt="">
+                            <h6 class="event-date">{{event.upcoming_date|date:'M d'}}</h6>
+                            <h4 class="event-title">{{event.name}}</h4>
+                        </div>
+                        <div class="date-fee d-flex justify-content-between">
+                            <div class="date">
+                                <p><i class="fa fa-clock"></i>{{event.upcoming_date}}</p>
+                            </div>
+                            <div class="events-fee">
+                                <a href="{%  url  'index' %}">{{event.price}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="blog-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>From Our Blog</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for blog in blogs %}
+                <div class="col-12 col-md-6">
+                    <div class="single-blog-area mb-100">
+                        <img src="{{blog.image.url}}" alt="">
+                        <div class="blog-content">
+                            <a href="{%  url  'From_detail' %}#" class="blog-headline">
+                                <h4>{{blog.author}}</h4>
+                            </a>
+                            <div class="meta d-flex align-items-center">
+                                <a href="{%  url  'index_login' %}#">{{blog.title}}</a>
+                                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                <a href="{%  url  'index_login' %}#">{{blog.category}}</a>
+                            </div>
+                            <p>{{blog.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+        <script data-cfasync="false"
+            src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+        <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/plugins/plugins.js' %}"></script>
+        <script src="{% static 'js/active.js' %}"></script>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-23581568-13');
+        </script>
+
+
+</body>
+
+</html>
